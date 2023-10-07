@@ -9,3 +9,6 @@ First, run the development server:
 ```bash
 pnpm dev
 ```
+
+Note for myself:
+alt+shit+o
