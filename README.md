@@ -10,11 +10,19 @@ First, run the development server:
 npm run dev
 ```
 
-Just note for myself:
-alt+shit+o
-
 ## Tech stack:
 
 - clsx tailwind-merge
 - Theme in global.css from 'https://ui.shadcn.com/themes'
 - tailwindcss-animate @tailwindcss/typography
+- lucide-react
+- npx shadcn-ui@latest init (choose components ui from uishadcn website)
+  -- for example `npx shadcn-ui@latest add button`
+- in div, set `aria-hidden='true'` for screen readers because is purely decorational people with visual disabilities won't care about it.Therefore, we can hide it on their devices making their navigation through our website much easier.
+
+## Learn Notes:
+
+Just note for myself:
+
+- alt+shit+o
+- tsx-> in html, We&apos;ll = we'll
