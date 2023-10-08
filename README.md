@@ -13,10 +13,10 @@ npm run dev
 ## Develop progress:
 
 ✅ Landing Page <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Navigation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anth<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functionality <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment and Launch <br>
+Navigation<br>
+Anth<br>
+Functionality <br>
+Payment and Launch <br>
 
 ## Tech stack:
 
