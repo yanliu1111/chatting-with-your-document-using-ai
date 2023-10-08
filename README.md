@@ -7,8 +7,14 @@ Learning resouce from Youtube channel [Josh tried coding](https://www.youtube.co
 First, run the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
-Note for myself:
+Just note for myself:
 alt+shit+o
+
+## Tech stack:
+
+- clsx tailwind-merge
+- Theme in global.css from 'https://ui.shadcn.com/themes'
+- tailwindcss-animate @tailwindcss/typography
