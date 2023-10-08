@@ -14,7 +14,7 @@ npm run dev
 
 ✅ Landing Page <br>
 Navigation<br>
-Anth<br>
+Auth<br>
 Functionality <br>
 Payment and Launch <br>
 
