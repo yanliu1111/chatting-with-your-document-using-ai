@@ -1,3 +1,10 @@
+import {
+  LoginLink,
+  RegisterLink,
+  getKindeServerSession,
+} from '@kinde-oss/kinde-auth-nextjs/server';
+
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import { buttonVariants } from './ui/button';
@@ -23,6 +30,21 @@ const Navbar = () => {
               >
                 Pricing
               </Link>
+              <LoginLink
+                className={buttonVariants({
+                  variant: 'ghost',
+                  size: 'sm',
+                })}
+              >
+                Sign In
+              </LoginLink>
+              <RegisterLink
+                className={buttonVariants({
+                  size: 'sm',
+                })}
+              >
+                Register <ArrowRight className='ml-1.5' />
+              </RegisterLink>
             </>
           </div>
         </div>
