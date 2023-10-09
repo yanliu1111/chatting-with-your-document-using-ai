@@ -36,6 +36,7 @@ export const appRouter = router({
   // new api endpoint, as the name status we pass in a user ID and we get back all files of this user owned
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
+
     return await db.file.findMany({
       where: {
         userId,
