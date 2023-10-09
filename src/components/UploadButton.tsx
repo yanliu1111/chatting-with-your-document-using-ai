@@ -16,7 +16,7 @@ const UploadButton = () => {
         }
       }}
     >
-      <DialogTrigger asChild>
+      <DialogTrigger onClick={() => setIsOpen(true)} asChild>
         {/* custom button, not a button that dialog is inherently, aschild makes the Button instead not pre-wrapped in one more button */}
         <Button>Upload PDF</Button>
       </DialogTrigger>
