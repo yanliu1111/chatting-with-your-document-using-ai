@@ -1,9 +1,10 @@
-import { publicProcedure, router } from './trpc';
+import { privateProcedure, publicProcedure, router } from './trpc';
 
 import { TRPCError } from '@trpc/server';
 import { db } from '@/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
+//main router, define all the api endpoints
 export const appRouter = router({
   //   test: publicProcedure.query(() => {
   //     return 3;
@@ -30,6 +31,16 @@ export const appRouter = router({
       });
     }
     return { success: true };
+  }),
+
+  // new api endpoint, as the name status we pass in a user ID and we get back all files of this user owned
+  getUserFiles: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+    return await db.file.findMany({
+      where: {
+        userId,
+      },
+    });
   }),
 });
 // Export type router type signature,
