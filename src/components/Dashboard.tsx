@@ -1,13 +1,14 @@
 'use client';
 
 import { Ghost, Loader2, MessageSquare, Plus, Trash } from 'lucide-react';
-import { useState } from 'react';
+
 import { Button } from './ui/button';
 import Link from 'next/link';
 import Skeleton from 'react-loading-skeleton';
 import UploadButton from './UploadButton';
 import { format } from 'date-fns';
 import { trpc } from '@/app/_trpc/client';
+import { useState } from 'react';
 
 const Dashboard = () => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const utils = trpc.useContext();
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
   //delete file
-  const { mutate: deleteFile, isLoading } = trpc.deleteFile.useMutation({
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation({
     onSuccess: () => {
       utils.getUserFiles.invalidate();
     },
