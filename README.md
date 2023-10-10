@@ -20,6 +20,10 @@ Functionality <br>
 - ✅ Dashboard setting<br>
 - ✅ tRPC setup<br>
 - ✅ Create database using Prisma<br>
+- ✅ Syncing Database<br>
+- ✅ Delete File functionality<br>
+- ✅ Dynamic [fileid] Routing<br>
+- ✅ Product Page<br>
 
 Payment and Launch <br>
 
@@ -37,6 +41,8 @@ Payment and Launch <br>
 - Prisma `npx prisma init` using mysql
 - Planetscale - select Prisma as ORM `npx prisma db push`
 - Dependency install `react-loading-skeleton` for loading animation
+- Dependency install `install date-fns` for date format
+- Dependency install `react-pdf` for pdf viewer
 
 ## Learn Notes:
 
