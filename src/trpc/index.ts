@@ -3,6 +3,7 @@ import { privateProcedure, publicProcedure, router } from './trpc';
 import { TRPCError } from '@trpc/server';
 import { db } from '@/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { z } from 'zod';
 
 //main router, define all the api endpoints
 export const appRouter = router({
@@ -43,6 +44,29 @@ export const appRouter = router({
       },
     });
   }),
+  deleteFile: privateProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      const file = await db.file.findFirst({
+        where: {
+          id: input.id,
+          userId,
+        },
+      });
+      if (!file)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'File not found',
+        });
+
+      await db.file.delete({
+        where: {
+          id: input.id,
+        },
+      });
+      return file;
+    }), //force type at runtime, if dont pass in id that exactly matches this type, then API route will throw an error
 });
 // Export type router type signature,
 // NOT the router itself.
