@@ -1,5 +1,6 @@
 'use client';
 
+import { Cloud, File } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 import { Button } from './ui/button';
@@ -25,8 +26,25 @@ const UploadDropzone = () => {
               className='flex flex-col items-center justify-center w-full h-full rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100'
             >
               <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                example
+                <Cloud className='h-6 w-6 text-zinc-500 mb-2' />
+                <p className='mb-2 text-sm text-gray-700'>
+                  <span className='font-semibold'>Click to Upload</span> or Drag
+                  and Drop
+                </p>
+                <p className='text-xs text-zinc-500'>PDF (Up To 4MB)</p>
               </div>
+              {acceptedFiles && acceptedFiles[0] ? (
+                <div className='max-w-xs bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200'>
+                  <div className='px-3 py-3 h-full grid place-items-center'>
+                    <File className='h-4 w-4 text-blue-500' />
+                  </div>
+                  <div className='px-3 py-2 h-full text-sm truncate'>
+                    {/* truncate is good for long file names, type Lorem10 */}
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Cum, doloribus?
+                  </div>
+                </div>
+              ) : null}
             </label>
           </div>
         </div>
