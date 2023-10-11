@@ -5,9 +5,26 @@ import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 import { Button } from './ui/button';
 import Dropzone from 'react-dropzone';
+import { Progress } from './ui/progress';
 import { useState } from 'react';
 
 const UploadDropzone = () => {
+  const [isUploading, setIsUploading] = useState<boolean>(true);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const startSimulatedProgress = () => {
+    setUploadProgress(0);
+    //setinterval is js function callback
+    const interval = setInterval(() => {
+      setUploadProgress((prevProgress) => {
+        if (prevProgress > =95){
+          clearInterval(interval)
+          return prevProgress
+        }
+        return prevProgress + 5;
+      })
+    }, 500)
+    return interval
+  }
   return (
     <Dropzone
       multiple={false}
@@ -40,9 +57,14 @@ const UploadDropzone = () => {
                   </div>
                   <div className='px-3 py-2 h-full text-sm truncate'>
                     {/* truncate is good for long file names, type Lorem10 */}
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Cum, doloribus?
+                    {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. */}
+                    {acceptedFiles[0].name}
                   </div>
+                </div>
+              ) : null}
+              {isUploading ? (
+                <div className='w-full mt-4 max-w-xs mx-auto'>
+                  <Progress value={50} className='h-1 w-full bg-zinc-200' />
                 </div>
               ) : null}
             </label>
