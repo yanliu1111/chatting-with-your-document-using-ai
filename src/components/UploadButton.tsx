@@ -16,15 +16,16 @@ const UploadDropzone = () => {
     //setinterval is js function callback
     const interval = setInterval(() => {
       setUploadProgress((prevProgress) => {
-        if (prevProgress > =95){
-          clearInterval(interval)
-          return prevProgress
+        if (prevProgress >= 95) {
+          clearInterval(interval);
+          return prevProgress;
         }
         return prevProgress + 5;
-      })
-    }, 500)
-    return interval
-  }
+      });
+    }, 500);
+
+    return interval;
+  };
   return (
     <Dropzone
       multiple={false}
