@@ -43,6 +43,7 @@ Payment and Launch <br>
 - Dependency install `react-loading-skeleton` for loading animation
 - Dependency install `install date-fns` for date format
 - Dependency install `react-pdf` for pdf viewer
+- Dependency install `react-dropzone` for drag and drop file
 
 ## Learn Notes:
 
