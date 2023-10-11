@@ -44,6 +44,8 @@ Payment and Launch <br>
 - Dependency install `install date-fns` for date format
 - Dependency install `react-pdf` for pdf viewer
 - Dependency install `react-dropzone` for drag and drop file
+- Dependency install `shadcn-ui@latest add progress` for progress bar animation
+- `uploadthing.com` for PDF storage
 
 ## Learn Notes:
 
@@ -54,3 +56,4 @@ Payment and Launch <br>
 - Setting auth-callback, frontend set: `src/app/auth-callback/page.tsx`, backend set: `src/trpc/index.ts`
 - `npx prisma studio` check prisma database in browser, host on http://localhost:5555/
 - Everytime change `schema.prima file`, do `npx prisma db push` and `npx prisma generate`
+- Determinate progress bar
