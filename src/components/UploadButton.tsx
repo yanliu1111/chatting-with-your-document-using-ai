@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 import { Button } from './ui/button';
 import Dropzone from 'react-dropzone';
 import { Progress } from './ui/progress';
+import { set } from 'date-fns';
 import { useState } from 'react';
 
 const UploadDropzone = () => {
@@ -29,8 +30,13 @@ const UploadDropzone = () => {
   return (
     <Dropzone
       multiple={false}
-      onDrop={(acceptedFile) => {
-        console.log(acceptedFile);
+      onDrop={async (acceptedFile) => {
+        setIsUploading(true);
+        const progressInterval = startSimulatedProgress();
+        //handle file upload
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
+        clearInterval(progressInterval);
+        setUploadProgress(100);
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -65,7 +71,10 @@ const UploadDropzone = () => {
               ) : null}
               {isUploading ? (
                 <div className='w-full mt-4 max-w-xs mx-auto'>
-                  <Progress value={50} className='h-1 w-full bg-zinc-200' />
+                  <Progress
+                    value={uploadProgress}
+                    className='h-1 w-full bg-zinc-200'
+                  />
                 </div>
               ) : null}
             </label>
