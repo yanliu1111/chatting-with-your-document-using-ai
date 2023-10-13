@@ -3,11 +3,12 @@ https://docs.uploadthing.com/nextjs/appdir
 */
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { createUploadthing, type FileRouter } from 'uploadthing/next';
+import { db } from '@/db';
 
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  pdfUploader: f({ image: { maxFileSize: '4MB' } })
+  pdfUploader: f({ pdf: { maxFileSize: '4MB' } })
     .middleware(async ({ req }) => {
       //only the authenticated user can upload images
       const { getUser } = getKindeServerSession();
@@ -16,12 +17,12 @@ export const ourFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      const createFile = await db.file.create({
+      const createdFile = await db.file.create({
         data: {
           key: file.key,
           name: file.name,
-          userID: metadata.userId,
-          url: 'https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}',
+          userId: metadata.userId,
+          url: `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`,
           uploadStatus: 'PROCESSING',
         },
       });
