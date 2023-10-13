@@ -1,4 +1,4 @@
-# Chatting with your documents using AI 🐱‍💻
+# Chatting with your documents using AI 🤗
 
 Learning resouce from Youtube channel [Josh tried coding](https://www.youtube.com/watch?v=ucX2zXAZ1I0&t=3760s&ab_channel=Joshtriedcoding)
 
@@ -45,7 +45,7 @@ Payment and Launch <br>
 - Dependency install `react-pdf` for pdf viewer
 - Dependency install `react-dropzone` for drag and drop file
 - Dependency install `shadcn-ui@latest add progress` for progress bar animation
-- `uploadthing.com` for PDF storage
+- `uploadthing.com` for PDF storage, and install `@uploadthing/react`
 
 ## Learn Notes:
 
