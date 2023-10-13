@@ -8,12 +8,13 @@ import Dropzone from 'react-dropzone';
 import { Progress } from './ui/progress';
 import { set } from 'date-fns';
 import { useState } from 'react';
+import { useToast } from './ui/use-toast';
 import { useUploadThing } from '@/lib/uploadthing';
 
 const UploadDropzone = () => {
   const [isUploading, setIsUploading] = useState<boolean>(true);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-
+  const { toast } = useToast();
   const { startUpload } = useUploadThing('pdfUploader');
 
   const startSimulatedProgress = () => {
@@ -42,7 +43,20 @@ const UploadDropzone = () => {
 
         const res = await startUpload(acceptedFile);
         if (!res) {
-          alter;
+          return toast({
+            title: 'Upload Failed',
+            description: 'Something went wrong, please try again.',
+            variant: 'destructive',
+          });
+        }
+        const [fileResponse] = res;
+        const key = fileResponse?.key;
+        if (!key) {
+          return toast({
+            title: 'Upload Failed',
+            description: 'Something went wrong, please try again.',
+            variant: 'destructive',
+          });
         }
 
         clearInterval(progressInterval);
