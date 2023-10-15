@@ -24,6 +24,7 @@ Functionality <br>
 - ✅ Delete File functionality<br>
 - ✅ Dynamic [fileid] Routing<br>
 - ✅ Product Page<br>
+- ✅ PDF Uploader functionality and ui<br>
 
 Payment and Launch <br>
 
@@ -46,6 +47,8 @@ Payment and Launch <br>
 - Dependency install `react-dropzone` for drag and drop file
 - Dependency install `shadcn-ui@latest add progress` for progress bar animation
 - `uploadthing.com` for PDF storage, and install `@uploadthing/react`
+- Dependency install `react-resize-detector` for resize window
+- Dependency install `npx shadcn-ui@latest add input` for input box
 
 ## Learn Notes:
 
@@ -57,3 +60,22 @@ Payment and Launch <br>
 - `npx prisma studio` check prisma database in browser, host on http://localhost:5555/
 - Everytime change `schema.prima file`, do `npx prisma db push` and `npx prisma generate`
 - Determinate progress bar
+- Fix bug:
+  When render pdf file got the error in cmd `you may need an appropriate loader to handle this file type, currently no loaders are configured to process this file.` This is why needs <mark>worker</mark> <br>
+  Go to `next.config` and change
+
+```js
+const nextConfig = {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias.encoding = false;
+    return config;
+  },
+};
+```
+
+pdf is not like images we cannot render them instead we need a custom webpack config inside of next config and `pdfRenderer.tsx`
+
+```ts
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+```
