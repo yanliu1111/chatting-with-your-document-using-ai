@@ -49,6 +49,7 @@ Payment and Launch <br>
 - `uploadthing.com` for PDF storage, and install `@uploadthing/react`
 - Dependency install `react-resize-detector` for resize window
 - Dependency install `npx shadcn-ui@latest add input` for input box
+- Dependency install `react-hook-form`and `@hookform/resolvers` for form validation
 
 ## Learn Notes:
 
