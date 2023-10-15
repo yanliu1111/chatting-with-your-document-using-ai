@@ -15,7 +15,8 @@ npm run dev
 ✅ Landing Page <br>
 ✅ Navigation<br>
 ✅ Auth<br>
-Functionality <br>
+
+🧱 Functionality <br>
 
 - ✅ Dashboard setting<br>
 - ✅ tRPC setup<br>
@@ -25,8 +26,8 @@ Functionality <br>
 - ✅ Dynamic [fileid] Routing<br>
 - ✅ Product Page<br>
 - ✅ PDF Uploader functionality and ui<br>
-
-Payment and Launch <br>
+- ✅ Features bar for PDF Viewer<br>
+  Payment and Launch <br>
 
 ## Tech stack:
 
