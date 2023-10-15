@@ -1,8 +1,8 @@
 # Chatting with your documents using AI 🤗
 
-Learning resouce from Youtube channel [Josh tried coding](https://www.youtube.com/watch?v=ucX2zXAZ1I0&t=3760s&ab_channel=Joshtriedcoding)
+Learning resouce from Youtube channel 👍 [Josh tried coding](https://www.youtube.com/watch?v=ucX2zXAZ1I0&t=3760s&ab_channel=Joshtriedcoding)
 
-## Getting Started
+## 🏁 Getting Started
 
 First, run the development server:
 
@@ -10,7 +10,7 @@ First, run the development server:
 npm run dev
 ```
 
-## Develop progress:
+## 👩‍🎨 Develop progress:
 
 ✅ Landing Page <br>
 ✅ Navigation<br>
@@ -27,9 +27,10 @@ npm run dev
 - ✅ Product Page<br>
 - ✅ PDF Uploader functionality and ui<br>
 - ✅ Features bar for PDF Viewer<br>
+
   Payment and Launch <br>
 
-## Tech stack:
+## 🧷Tech stack:
 
 - clsx tailwind-merge
 - Theme in global.css from 'https://ui.shadcn.com/themes'
@@ -51,8 +52,10 @@ npm run dev
 - Dependency install `react-resize-detector` for resize window
 - Dependency install `npx shadcn-ui@latest add input` for input box
 - Dependency install `react-hook-form`and `@hookform/resolvers` for form validation
+- Dependency install `shadcn-ui@latest add dropdown-menu`
+- Dependency install `simplebar-react` for scroll bar
 
-## Learn Notes:
+## 🎃 Learn Notes:
 
 - alt+shit+o (Just note for myself)
 - tsx-> in html, We\&apos;ll = we'll
