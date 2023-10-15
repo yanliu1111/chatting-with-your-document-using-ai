@@ -1,5 +1,6 @@
 import './globals.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import 'simplebar-react/dist/simplebar.min.css';
 
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
