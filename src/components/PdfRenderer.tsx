@@ -4,7 +4,15 @@
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-import { ChevronDown, ChevronUp, Loader2, Search } from 'lucide-react';
+import {
+  ChevronDown,
+  ChevronUp,
+  Divide,
+  Ghost,
+  Loader2,
+  RotateCw,
+  Search,
+} from 'lucide-react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import {
   DropdownMenu,
@@ -15,6 +23,7 @@ import {
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import PdfFullScreen from './PdfFullScreen';
 import SimpleBar from 'simplebar-react';
 import { cn } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
@@ -34,6 +43,9 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
   const [numPages, setNumPages] = useState<number>();
   const [currPage, setCurrPage] = useState<number>(1); //default to page 1
   const [scale, setScale] = useState<number>(1);
+  const [rotation, setRotation] = useState<number>(0); // 0, 90, 180, 270
+  const [renderedScale, setRenderedScale] = useState<number | null>(null);
+  const isLoading = renderedScale !== scale;
   const CustomPageValidator = z.object({
     page: z
       .string()
@@ -67,7 +79,10 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
         <div className='flex items-center gap-1.5'>
           <Button
             disabled={currPage <= 1}
-            onClick={() => setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1))}
+            onClick={() => {
+              setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1));
+              setValue('page', String(currPage - 1));
+            }}
             variant='ghost'
             aria-label='previous page'
           >
@@ -98,6 +113,7 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
               setCurrPage(
                 (prev) => (prev + 1 > numPages! ? numPages! : prev + 1) // numPages! is safe because we check for it in the disabled prop
               );
+              setValue('page', String(currPage + 1));
             }}
             variant='ghost'
             aria-label='previous page'
@@ -128,6 +144,14 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Button
+            onClick={() => setRotation((prev) => prev + 90)}
+            variant='ghost'
+            aira-lable='rotate 90 degrees'
+          >
+            <RotateCw className='h-4 w-4' />
+          </Button>
+          <PdfFullScreen fileUrl={url} />
         </div>
       </div>
 
@@ -152,11 +176,29 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
               file={url}
               className='max-h-full'
             >
+              {isLoading && renderedScale ? (
+                <Page
+                  width={width ? width : 1}
+                  pageNumber={currPage}
+                  // onError={(e) => console.log(e)} // for debugging
+                  scale={scale}
+                  rotate={rotation}
+                  key={'@' + renderedScale}
+                />
+              ) : null}
               <Page
+                className={cn(isLoading ? 'hidden' : '')}
                 width={width ? width : 1}
                 pageNumber={currPage}
-                // onError={(e) => console.log(e)} // for debugging
                 scale={scale}
+                rotate={rotation}
+                key={'@' + scale}
+                loading={
+                  <div className='flex justify-center'>
+                    <Loader2 className='my-24 h-6 w-6 animate-spin' />
+                  </div>
+                }
+                onRenderSuccess={() => setRenderedScale(scale)} // important change we need to make this is to update the rendered scale once this page renders, react PDF library provides the helper for that onrendersuccess and this can take a callback function. Means setRenderedScale to scale, finished rendering the page, we are displaying the new page.
               />
             </Document>
           </div>
