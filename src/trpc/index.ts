@@ -45,6 +45,19 @@ export const appRouter = router({
     });
   }),
   //z.object is a type checker, a certen schema, if the input doesnt match the schema, then it will throw an error. key is important for checking the input
+  getFileUploadStatus: privateProcedure
+    .input(z.object({ fileId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const file = await db.file.findFirst({
+        where: {
+          id: input.fileId,
+          userId: ctx.userId,
+        },
+      });
+      if (!file) return { status: 'PENDING' as const }; // as const only for ts, if we left away the as const it would be any string but we want it to be exactly 'PENDING' string. That is what the as const is for.
+      return { status: file.uploadStatus };
+    }),
+
   getFile: privateProcedure
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {
