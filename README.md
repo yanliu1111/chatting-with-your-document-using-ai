@@ -54,6 +54,8 @@ npm run dev
 - Dependency install `react-hook-form`and `@hookform/resolvers` for form validation
 - Dependency install `shadcn-ui@latest add dropdown-menu`
 - Dependency install `simplebar-react` for scroll bar
+- Dependency install `npx shadcn-ui@latest add textarea` for message textarea
+- Dependency install `react-textarea-autosize` for auto resize textarea
 
 ## 🎃 Learn Notes:
 
