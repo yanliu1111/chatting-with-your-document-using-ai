@@ -31,6 +31,7 @@ npm run dev
 - ✅ ChatInput functionality<br>
 - ✅ Streaming API response in real time<br>
 - LLM (semantic query) (first try 😀)<br>
+- pinecone.io for vector database
 
   Payment and Launch <br>
 
@@ -60,6 +61,8 @@ npm run dev
 - Dependency install `simplebar-react` for scroll bar
 - Dependency install `npx shadcn-ui@latest add textarea` for message textarea
 - Dependency install `react-textarea-autosize` for auto resize textarea
+- Install `@pinecone-database/pinecone`
+- Install `langchain`
 
 ## 🎃 Learn Notes:
 
