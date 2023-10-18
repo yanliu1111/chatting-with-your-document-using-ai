@@ -27,6 +27,10 @@ npm run dev
 - ✅ Product Page<br>
 - ✅ PDF Uploader functionality and ui<br>
 - ✅ Features bar for PDF Viewer<br>
+- ✅ Create Message section and instant loading State<br>
+- ✅ ChatInput functionality<br>
+- ✅ Streaming API response in real time<br>
+- LLM (semantic query) (first try 😀)<br>
 
   Payment and Launch <br>
 
