@@ -20,5 +20,13 @@ export const POST = async (req: NextRequest) => {
   });
   if (!file) return new Response('Not found', { status: 404 });
   // if file found, create message, do db
-  await db.message.create();
+  await db.message.create({
+    data: {
+      text: message,
+      isUserMessage: true,
+      userId,
+      fileId,
+    },
+  });
+  // n
 };
