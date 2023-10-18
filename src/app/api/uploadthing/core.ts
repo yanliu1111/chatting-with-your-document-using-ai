@@ -4,7 +4,10 @@ https://docs.uploadthing.com/nextjs/appdir
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { db } from '@/db';
-
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
+import { pinecone } from '@/lib/pinecone';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+// also can use other services instead of openai to take the text and turn them into a vector
 const f = createUploadthing();
 
 export const ourFileRouter = {
@@ -26,6 +29,20 @@ export const ourFileRouter = {
           uploadStatus: 'PROCESSING',
         },
       });
+      try {
+        const response = await fetch(
+          `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`
+        );
+        const blob = await response.blob();
+        const loader = new PDFLoader(blob);
+        const pageLevelDocs = await loader.load();
+        const pagesAmt = pageLevelDocs.length;
+        //vectorize and index entire document
+        const pineconeIndex = await pinecone.createIndex('docsai');
+        const embeddings = new OpenAIEmbeddings({
+          openAIApiKey: process.env.OPENAI_API_KEY!,
+        });
+      } catch (error) {}
     }),
 } satisfies FileRouter;
 
