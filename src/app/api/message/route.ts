@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { SendMessageValidator } from '@/lib/validators/SendMessageValidator';
 import { db } from '@/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
@@ -28,5 +29,8 @@ export const POST = async (req: NextRequest) => {
       fileId,
     },
   });
-  // n
+  // 1: vectorize message
+  const embeddings = new OpenAIEmbeddings({
+    openAIApiKey: process.env.OPENAI_API_KEY,
+  });
 };

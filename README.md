@@ -63,6 +63,7 @@ npm run dev
 - Dependency install `react-textarea-autosize` for auto resize textarea
 - Install `@pinecone-database/pinecone`
 - Install `langchain`
+- Install `pdf-parse` for langchain pdf parsing
 
 ## 🎃 Learn Notes:
 
