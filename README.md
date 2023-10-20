@@ -64,6 +64,7 @@ npm run dev
 - Install `@pinecone-database/pinecone`
 - Install `langchain`
 - Install `pdf-parse` for langchain pdf parsing
+- Install `openai`
 
 ## 🎃 Learn Notes:
 
