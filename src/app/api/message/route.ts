@@ -1,4 +1,7 @@
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+
 import { NextRequest } from 'next/server';
+import OpenAI from 'openai';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { SendMessageValidator } from '@/lib/validators/SendMessageValidator';
@@ -92,4 +95,18 @@ export const POST = async (req: NextRequest) => {
       },
     ],
   });
+  //cannot trpc but instead of custom route
+  const stream = OpenAIStream(response, {
+    async onCompletion(completion) {
+      await db.message.create({
+        data: {
+          text: completion,
+          isUserMessage: false,
+          fileId,
+          userId,
+        },
+      });
+    },
+  });
+  return new StreamingTextResponse(stream);
 };
