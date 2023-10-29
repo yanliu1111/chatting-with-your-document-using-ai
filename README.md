@@ -65,6 +65,7 @@ npm run dev
 - Install `langchain`
 - Install `pdf-parse` for langchain pdf parsing
 - Install `openai`
+- Install `ai` from `https://www.npmjs.com/package/ai`
 
 ## 🎃 Learn Notes:
 
