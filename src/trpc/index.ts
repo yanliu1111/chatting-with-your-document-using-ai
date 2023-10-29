@@ -1,5 +1,6 @@
 import { privateProcedure, publicProcedure, router } from './trpc';
 
+import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query';
 import { TRPCError } from '@trpc/server';
 import { db } from '@/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
@@ -44,10 +45,34 @@ export const appRouter = router({
       },
     });
   }),
+  getFileMessages: privateProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).nullish(),
+        cursor: z.string().nullish(), //nullish means dont have to pass in this value
+        fileId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      const { fileId, cursor } = input;
+      const limit = input.limit ?? INFINITE_QUERY_LIMIT; //if input.limit is nullish, then use 10 as default
+      const file = await db.file.findFirst({
+        where: {
+          id: fileId,
+          userId,
+        },
+      });
+      if (!file)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'File not found',
+        });
+    }),
   //z.object is a type checker, a certen schema, if the input doesnt match the schema, then it will throw an error. key is important for checking the input
   getFileUploadStatus: privateProcedure
     .input(z.object({ fileId: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input, ctx }) => {
       const file = await db.file.findFirst({
         where: {
           id: input.fileId,
