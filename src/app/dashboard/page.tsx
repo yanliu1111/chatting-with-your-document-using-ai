@@ -8,10 +8,14 @@ import { redirect } from 'next/navigation';
 const Page = async () => {
   const { getUser } = getKindeServerSession();
   const user = getUser();
-  // check user login
+
   if (!user || !user.id) redirect('/auth-callback?origin=dashboard');
-  const dbUser = await db.user.findFirst({ where: { id: user.id } });
-  // check user sync in db
+
+  const dbUser = await db.user.findFirst({
+    where: {
+      id: user.id,
+    },
+  });
   if (!dbUser) redirect('/auth-callback?origin=dashboard');
   return <Dashboard />;
 };
