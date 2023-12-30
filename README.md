@@ -69,6 +69,8 @@ npm run dev
 
 ## 🎃 Learn Notes:
 
+- 😍 I just found the way to ask github copilot question using `control+shit+I`, which is silimar asking gpt platform, but it is easier to directly ask programming related questions in vscode. I like it.
+
 - alt+shit+o (Just note for myself)
 - tsx-> in html, We\&apos;ll = we'll
 - \_trpc folder under app is not for route (navigate to the URL)
