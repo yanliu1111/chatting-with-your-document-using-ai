@@ -18,5 +18,6 @@ const Page = async () => {
   });
   if (!dbUser) redirect('/auth-callback?origin=dashboard');
   return <Dashboard />;
+  //return <div>{user.email}</div>;
 };
 export default Page;

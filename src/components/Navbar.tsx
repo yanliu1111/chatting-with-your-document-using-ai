@@ -43,7 +43,7 @@ const Navbar = () => {
                   size: 'sm',
                 })}
               >
-                Register <ArrowRight className='ml-1.5' />
+                Register <ArrowRight className='ml-1.5 h-5 w-5' />
               </RegisterLink>
             </>
           </div>
