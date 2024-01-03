@@ -117,4 +117,7 @@ Error querying the database: Server error: `ERROR HY000 (1105): unavailable: una
   17 |   },
 ```
 
-The reason is planetscale database is not connected. Go to planetscale and connect the database again. Then, go to `prisma/schema.prisma` and change the database name to the new one. Then, run `npx prisma db push` and `npx prisma generate` again. It should be fixed.
+1. The reason is planetscale database is not connected. Go to planetscale and connect the database again. Then, go to `prisma/schema.prisma` and change the database name to the new one.
+2. Then, run `npx prisma db push` and `npx prisma generate` again. It should be fixed. Then `ctrl` + `shift` + `P` choose `Developer: Reload Window` (02:12:30)
+3. Go to `$ npx prisma studio` to clean up the user email and pdf upload files.
+   All work fine now.
