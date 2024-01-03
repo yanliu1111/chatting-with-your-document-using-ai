@@ -98,3 +98,23 @@ pdf is not like images we cannot render them instead we need a custom webpack co
 ```ts
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 ```
+
+## 🐞Bug fix:
+
+- Got the error, just after login
+
+```
+Unhandled Runtime Error
+Error:
+Invalid `prisma.user.findFirst()` invocation:
+Error querying the database: Server error: `ERROR HY000 (1105): unavailable: unable to connect to branch nv0jhhj9a59u'
+ if (!user || !user.id) redirect('/auth-callback?origin=dashboard');
+  13 |
+> 14 | const dbUser = await db.user.findFirst({
+     |               ^
+  15 |   where: {
+  16 |     id: user.id,
+  17 |   },
+```
+
+The reason is planetscale database is not connected. Go to planetscale and connect the database again. Then, go to `prisma/schema.prisma` and change the database name to the new one. Then, run `npx prisma db push` and `npx prisma generate` again. It should be fixed.
