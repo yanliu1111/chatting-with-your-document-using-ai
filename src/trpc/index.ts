@@ -37,6 +37,7 @@ export const appRouter = router({
   }),
 
   // new api endpoint, as the name status we pass in a user ID and we get back all files of this user owned
+  // trpc will transfore the getUserFiles.useQuery {data} to compoent/Dashboard.tsx {data}
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
 
@@ -71,6 +72,7 @@ export const appRouter = router({
         });
     }),
   //z.object is a type checker, a certen schema, if the input doesnt match the schema, then it will throw an error. key is important for checking the input
+  //everything put in the middleware ctx (trpc/trpc.ts), will accessible in the privateProcedure (the api endpoint)
   getFileUploadStatus: privateProcedure
     .input(z.object({ fileId: z.string() }))
     .query(async ({ input, ctx }) => {
