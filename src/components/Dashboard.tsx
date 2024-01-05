@@ -18,9 +18,11 @@ const Dashboard = () => {
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
   //delete file, when call useMutation:deleteFile in dashboard, then go to trpc/index.ts to run deleteFile code
   const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    // invalidate query after delete file success
     onSuccess: () => {
       utils.getUserFiles.invalidate();
     },
+    // purpose of onMutate is to set currentlyDeletingFile to the id of the file that is being deleted
     onMutate({ id }) {
       setCurrentlyDeletingFile(id);
     },
