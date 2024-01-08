@@ -85,7 +85,7 @@ export const appRouter = router({
       if (!file) return { status: 'PENDING' as const }; // as const only for ts, if we left away the as const it would be any string but we want it to be exactly 'PENDING' string. That is what the as const is for.
       return { status: file.uploadStatus };
     }),
-
+  // polling between docsai app and api to uploadthing db, after set and connect uploadthing, check if the file is uploaded, if not then keep checking
   getFile: privateProcedure
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {

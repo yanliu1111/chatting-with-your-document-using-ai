@@ -20,9 +20,11 @@ const UploadDropzone = () => {
   const { toast } = useToast();
   const { startUpload } = useUploadThing('pdfUploader');
 
+  //frontend polling after setting api in src/trpc/index.ts
+  // trigger the polling:  {mutate: startPolling}
   const { mutate: startPolling } = trpc.getFile.useMutation({
     onSuccess: (file) => {
-      router.push(`/dashboard/${file.id}`); //redirect to dashboard, bug is here ``
+      router.push(`/dashboard/${file.id}`); //redirect to dashboard, bug happened here
     },
     retry: true,
     retryDelay: 500,
@@ -109,6 +111,7 @@ const UploadDropzone = () => {
               {/* jsx for uploading */}
               {isUploading ? (
                 <div className='w-full mt-4 max-w-xs mx-auto'>
+                  {/* go to file ui/progress, override the cn setting, add more indicator setting */}
                   <Progress
                     indicatorColor={
                       uploadProgress === 100 ? 'bg-green-500' : ''

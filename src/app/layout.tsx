@@ -30,7 +30,8 @@ export default function RootLayout({
             inter.className
           )}
         >
-          <Toaster />
+          <Toaster />{' '}
+          {/* 1st step setting router after intall Toaster. Toaster is a component that will be used to display toast messages. */}
           <Navbar />
           {children}
         </body>
