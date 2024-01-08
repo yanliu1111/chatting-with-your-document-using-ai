@@ -14,6 +14,7 @@ import { useUploadThing } from '@/lib/uploadthing';
 
 const UploadDropzone = () => {
   const router = useRouter();
+  //manage upload state
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const { toast } = useToast();
@@ -44,13 +45,13 @@ const UploadDropzone = () => {
   };
   return (
     <Dropzone
-      multiple={false}
+      multiple={false} // only allow one file to be uploaded
       onDrop={async (acceptedFile) => {
         setIsUploading(true);
+        //start progress bar
         const progressInterval = startSimulatedProgress();
         //handle file upload
         // await new Promise((resolve) => setTimeout(resolve, 2000));
-
         const res = await startUpload(acceptedFile);
         if (!res) {
           return toast({
@@ -74,6 +75,7 @@ const UploadDropzone = () => {
         startPolling({ key });
       }}
     >
+      {/* return jsx in div*/}
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
           {...getRootProps()}
@@ -104,6 +106,7 @@ const UploadDropzone = () => {
                   </div>
                 </div>
               ) : null}
+              {/* jsx for uploading */}
               {isUploading ? (
                 <div className='w-full mt-4 max-w-xs mx-auto'>
                   <Progress
