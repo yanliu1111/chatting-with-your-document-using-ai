@@ -79,9 +79,34 @@ npm run dev
 - `npx prisma studio` check prisma database in browser, host on http://localhost:5555/
 - Everytime change `schema.prima file`, do `npx prisma db push` and `npx prisma generate`
 - Determinate progress bar
-- Fix bug:
-  When render pdf file got the error in cmd `you may need an appropriate loader to handle this file type, currently no loaders are configured to process this file.` This is why needs <mark>worker</mark> <br>
-  Go to `next.config` and change
+- Simple PDF loading code for 1st testing
+
+```ts
+<Document
+  loading={
+    <div className='flex justify-center'>
+      <Loader2 className='my-24 h-6 w-6 animate-spin' />
+    </div>
+  }
+  onLoadError={() => {
+    toast({
+      title: 'Error loading pdf',
+      description: 'Something went wrong while loading the pdf.',
+      variant: 'destructive',
+    });
+  }}
+  file={url}
+  className='max-h-full'
+>
+  <Page pageNumber={1} />
+</Document>
+```
+
+## 🐞Bug fix:
+
+1. Fix bug:
+   When render pdf file got the error in cmd `you may need an appropriate loader to handle this file type, currently no loaders are configured to process this file.` This is why needs <mark>worker</mark> <br>
+   Go to `next.config` and change
 
 ```js
 const nextConfig = {
@@ -99,9 +124,8 @@ pdf is not like images we cannot render them instead we need a custom webpack co
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 ```
 
-## 🐞Bug fix:
-
-- Got the error, just after login
+<br>
+2. Got the error, just after login
 
 ```
 Unhandled Runtime Error
