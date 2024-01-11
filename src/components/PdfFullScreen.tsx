@@ -32,7 +32,9 @@ const PdfFullScreen = ({ fileUrl }: PdfFullScreenProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className='max-w-7xl w-full'>
+        {/* right moving bar, simplebar is same as PdfRenderer too*/}
         <SimpleBar autoHide={false} className='max-h-[calc(100vh-10rem)] mt-6'>
+          {/* copy from PdfRenderer, ref and document */}
           <div ref={ref}>
             <Document
               loading={
@@ -51,6 +53,7 @@ const PdfFullScreen = ({ fileUrl }: PdfFullScreenProps) => {
               file={fileUrl}
               className='max-h-full'
             >
+              {/* map over all pages we have */}
               {new Array(numPages).fill(0).map((_, i) => (
                 <Page
                   key={i}

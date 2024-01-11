@@ -26,13 +26,13 @@ import { Input } from './ui/input';
 import PdfFullScreen from './PdfFullScreen';
 import SimpleBar from 'simplebar-react';
 import { cn } from '@/lib/utils';
+import { url } from 'inspector';
 import { useForm } from 'react-hook-form';
 import { useResizeDetector } from 'react-resize-detector';
 import { useState } from 'react';
 import { useToast } from './ui/use-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { url } from 'inspector';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -153,6 +153,7 @@ const PdfRenderer = ({ url }: pdfRenderProps) => {
             <RotateCw className='h-4 w-4' />
           </Button>
           <PdfFullScreen fileUrl={url} />
+          {/* connect to pdffullscreen, url is props to there : PdfFullScreen = ({ fileUrl }: PdfFullScreenProps) */}
         </div>
       </div>
 
