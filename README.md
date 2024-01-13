@@ -30,8 +30,8 @@ npm run dev
 - ✅ Create Message section and instant loading State<br>
 - ✅ ChatInput functionality<br>
 - ✅ Streaming API response in real time<br>
+- ✅ pinecone.io for vector database, setting 1536 dimension for generating openai semantic vector<br>
 - LLM (semantic query) (first try 😀)<br>
-- pinecone.io for vector database
 
   Payment and Launch <br>
 
