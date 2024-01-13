@@ -24,7 +24,7 @@ const ChatWrapper = ({ fileId }: ChatWrapperProps) => {
         data?.status === 'SUCCESS' || data?.status === 'FAILED' ? false : 500,
     }
   );
-
+  //handle pdf loading, processing, and failed
   if (isLoading)
     return (
       <div className='relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2'>
