@@ -18,8 +18,9 @@ export const POST = async (req: NextRequest) => {
   const { id: userId } = user;
   if (!userId) return new Response('Unauthorized', { status: 401 });
   //body contents are validated against the schema, schema validation library, zod, makes sure that we always have data. Create a validator for each endpoint.
+  //before create body contents, we created the validators in lib/validators/SendMessageValidator.ts
   const { fileId, message } = SendMessageValidator.parse(body);
-  // find file in db
+  // when parse works, it always fileId and message init. Find file in db
   const file = await db.file.findFirst({
     where: {
       id: fileId,
@@ -27,7 +28,8 @@ export const POST = async (req: NextRequest) => {
     },
   });
   if (!file) return new Response('Not found', { status: 404 });
-  // if file found, create message, do db
+  //if file found, create message, do db
+  //create message in prisma/schema
   await db.message.create({
     data: {
       text: message,

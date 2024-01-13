@@ -3,14 +3,13 @@ import { ReactNode, createContext, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '../ui/use-toast';
 
-//react state
 type StreamResponse = {
   addMessage: () => void;
   message: string;
-  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void; //trigger the event when <Textarea> used in chatinput.tsx
   isLoading: boolean;
 };
-
+//react state
 export const ChatContext = createContext<StreamResponse>({
   addMessage: () => {},
   message: '',
@@ -22,7 +21,7 @@ interface Props {
   fileId: string;
   children: ReactNode;
 }
-
+//wrap the other components
 export const ChatContextProvider = ({ fileId, children }: Props) => {
   const [message, setMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
