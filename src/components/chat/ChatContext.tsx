@@ -3,6 +3,7 @@ import { ReactNode, createContext, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '../ui/use-toast';
 
+//react state
 type StreamResponse = {
   addMessage: () => void;
   message: string;
