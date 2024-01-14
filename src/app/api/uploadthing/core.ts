@@ -37,7 +37,16 @@ export const ourFileRouter = {
         );
         const blob = await response.blob();
         const loader = new PDFLoader(blob);
-        const pageLevelDocs = await loader.load();
+        var pageLevelDocs = await loader.load();
+        //debugging, for instead namespacing using metadata
+        //instead add metadata to each document you send to db and for getting similaritySearches just pass the metadata you included as third argument. this way you dont need to use namespaces in pinecone vectorStore
+        pageLevelDocs = pageLevelDocs.map((doc) => {
+          doc.metadata = {
+            ...doc.metadata,
+            fileId: createdFile.id,
+          };
+          return doc;
+        });
         const pagesAmt = pageLevelDocs.length;
         //vectorize and index entire document
         const pinecone = await getPineconeClient();
@@ -49,7 +58,7 @@ export const ourFileRouter = {
         await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
           //@ts-ignore
           pineconeIndex,
-          namespace: createdFile.id,
+          filter: { fileId: createdFile.id },
         });
         await db.file.update({
           data: {

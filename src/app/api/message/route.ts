@@ -44,13 +44,15 @@ export const POST = async (req: NextRequest) => {
   });
   const pinecone = await getPineconeClient();
   const pineconeIndex = pinecone.Index('docsai');
-
-  const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+  //debugging, for instead namespacing using metadata
+  //instead add metadata to each document you send to db and for getting similaritySearches just pass the metadata you included as third argument. this way you dont need to use namespaces in pinecone vectorStore
+  //use metadata to each document you send to db and for getting similaritySearches just pass the metadata you included as third argument. this way you dont need to use namespaces in pinecone vectorStore
+  const userMessage = await PineconeStore.fromExistingIndex(embeddings, {
     pineconeIndex,
-    namespace: file.id,
+    filter: { fileId },
   });
 
-  const results = await vectorStore.similaritySearch(message, 4);
+  const results = await userMessage.similaritySearch(message, 4); // 4 closest results
 
   const prevMessages = await db.message.findMany({
     where: {
