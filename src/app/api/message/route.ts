@@ -61,10 +61,10 @@ export const POST = async (req: NextRequest) => {
     orderBy: {
       createdAt: 'asc',
     },
-    take: 6,
+    take: 6, // 6 previous messages
   });
   const formattedPrevMessages = prevMessages.map((msg) => ({
-    role: msg.isUserMessage ? ('user' as const) : ('assistant' as const),
+    role: msg.isUserMessage ? ('user' as const) : ('assistant' as const), //as const means that the type is a string literal
     content: msg.text,
   }));
   const response = await openai.chat.completions.create({
@@ -99,6 +99,7 @@ export const POST = async (req: NextRequest) => {
       },
     ],
   });
+  //real time streaming back to client, install package ai
   //cannot trpc but instead of custom route
   const stream = OpenAIStream(response, {
     async onCompletion(completion) {
@@ -112,5 +113,6 @@ export const POST = async (req: NextRequest) => {
       });
     },
   });
+  //just returned steam from here , now accept in the context
   return new StreamingTextResponse(stream);
 };
