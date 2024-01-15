@@ -75,6 +75,8 @@ const UploadDropzone = () => {
         clearInterval(progressInterval);
         setUploadProgress(100);
         startPolling({ key });
+        console.log('fileResponse', fileResponse);
+        console.log('key', key);
       }}
     >
       {/* return jsx in div*/}
